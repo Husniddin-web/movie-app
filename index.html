@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap  -->
+    <!-- CSS only -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!-- bootstrap icon  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- main css  -->
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="shortcut icon" href="./img/images.png" type="image/x-icon">
+    <title>Uz_Movie.com</title>
+</head>
+
+<body>
+    <!-- header start  -->
+    <header>
+        <nav class="nav__site">
+            <div class="modal-wrapper  modal-swipe" id="modal">
+                <div class="modal-content">
+                    <button class="btnModal" id="modal-btn">
+                        Close
+                    </button>
+                    <div class="modal-logo">
+                        <img src="./img/camera.png" class="modal-img" alt="">
+                    </div>
+                    <div class="modal-text">
+                        <ul class="modal-list">
+                            <li class="modal-item">Year: 2012</li>
+                            <li class="modal-item">Davomiyligi: 1 soat 23 daqiqa </li>
+                            <li class="modal-item"> Til : Uzbek</li>
+                            <li class="modal-item summary"> Izoh : Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                Consectetur animi totam esse aliquid iure sapiente alias provident voluptates
+                                recusandae, ipsum qui optio repellat laudantium quia, inventore harum. Nihil, magni vel.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="nav">
+                    <div class="nav__logo">
+                        <a class="nav__logo-href" href="./index.html">
+                            <img class="nav__img" j src="./img/camera.png" alt="">
+                            <span class="nav__title">UZ_movie</span>
+                        </a>
+                    </div>
+                    <div class="nav__search">
+                        <ul class="nav__search-list swipe    ">
+
+                            <li class="nav__search-item search">
+                                <input class="form-control p-2 m-0" placeholder="search film ..." id="searchFilm"
+                                    type="text" name="search-fil">
+                            </li>
+                            <li class="nav__search-item">
+                                <a class="nav__Search-item-title menue">Bosh sahifa</a>
+                            </li>
+                            <li class="nav__search-item">
+                                <h3 class="nav__Search-item-title">Sevimlilar</h3>
+
+
+                                <span><i class="bi bi-bookmark-heart  liked"></i></span>
+                                <span class=" plus  badge rounded-pill bg-info text-dark"></span>
+                            </li>
+                            <li class="nav__search-item">
+                                <h3 class="nav__Search-item-title">Kirish</h3>
+                                <span><i class="bi bi-person-fill person"></i></span>
+                            </li>
+                        </ul>
+                        <span class="menue-bar"><i class="bi bi-list"></i></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- header end  -->
+    <!-- main start -->
+    <main>
+        <section class="hero-site">
+            <div class="container">
+                <div class="row my-5 ">
+                    <div class="col-lg-3 searchSite ">
+                        <form>
+                            <input class="form-control " placeholder="search film ..." id="srFilm" type="text"
+                                name="search-film">
+                            <input type="number" max="10" placeholder="enter film rating" class="form-control" min="0"
+                                id="number" value='1'>
+                            <select name="catogry" id="select-form" class="form-select">
+                                <option value="All" selected disabled>All</option>
+                            </select>
+                            <button class=" w-100 " type="button" id="hero-btn">Search</button>
+                        </form>
+                        <div class="card infos shadow my-3 p-3">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="all-movies-wrapper">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- main end -->
+
+
+
+</body>
+<script src="./js/plugin.js"></script>
+<script src="./js/db.js"></script>
+<script src="./js/scrol.js"></script>
+<script src="./js/index.js"></script>
+
+</html>
