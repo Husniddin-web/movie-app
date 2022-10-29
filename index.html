@@ -20,25 +20,21 @@
     <!-- header start  -->
     <header>
         <nav class="nav__site">
-            <div class="modal-wrapper  modal-swipe" id="modal">
+            <div class="modal-wrapper modal-swipe " id="modal">
                 <div class="modal-content">
                     <button class="btnModal" id="modal-btn">
                         Close
                     </button>
-                    <div class="modal-logo">
-                        <img src="./img/camera.png" class="modal-img" alt="">
+                    <div class="modal-box">
+
                     </div>
-                    <div class="modal-text">
-                        <ul class="modal-list">
-                            <li class="modal-item">Year: 2012</li>
-                            <li class="modal-item">Davomiyligi: 1 soat 23 daqiqa </li>
-                            <li class="modal-item"> Til : Uzbek</li>
-                            <li class="modal-item summary"> Izoh : Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Consectetur animi totam esse aliquid iure sapiente alias provident voluptates
-                                recusandae, ipsum qui optio repellat laudantium quia, inventore harum. Nihil, magni vel.
-                            </li>
-                        </ul>
-                    </div>
+
+                </div>
+            </div>
+            <div class="films-box modal-swipe container">
+                <span class="clos"><i class="bi bi-x-octagon-fill clos " ></i></span>
+                <div class="film-wrapper">
+                    
                 </div>
             </div>
             <div class="container">
@@ -50,17 +46,17 @@
                         </a>
                     </div>
                     <div class="nav__search">
-                        <ul class="nav__search-list swipe    ">
+                        <ul class="nav__search-list  swipeTop   ">
 
                             <li class="nav__search-item search">
-                                <input class="form-control p-2 m-0" placeholder="search film ..." id="searchFilm"
-                                    type="text" name="search-fil">
+                                <input class="form-control p-2 m-0 inputSr" placeholder="search film ..."
+                                    id="searchFilm" type="text" name="search-fil">
                             </li>
                             <li class="nav__search-item">
-                                <a class="nav__Search-item-title menue">Bosh sahifa</a>
+                                <a href="./index.html" class="nav__Search-item-title menue">Bosh sahifa</a>
                             </li>
                             <li class="nav__search-item">
-                                <h3 class="nav__Search-item-title">Sevimlilar</h3>
+                                <h3 class="nav__Search-item-title adds" id="adds">Sevimlilar</h3>
 
 
                                 <span><i class="bi bi-bookmark-heart  liked"></i></span>
@@ -85,7 +81,7 @@
                 <div class="row my-5 ">
                     <div class="col-lg-3 searchSite ">
                         <form>
-                            <input class="form-control " placeholder="search film ..." id="srFilm" type="text"
+                            <input class="form-control " required placeholder="search film ..." id="srFilm" type="text"
                                 name="search-film">
                             <input type="number" max="10" placeholder="enter film rating" class="form-control" min="0"
                                 id="number" value='1'>
@@ -94,13 +90,15 @@
                             </select>
                             <button class=" w-100 " type="button" id="hero-btn">Search</button>
                         </form>
-                        <div class="card infos shadow my-3 p-3">
+                        <div class="card infos shadow my-3 ">
 
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="all-movies-wrapper">
-
+                            <!-- <div class="all-movies card">
+                              
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 /* GENERAL STYLE  */
 body{
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: #F8F5F1;
 }
@@ -66,8 +66,16 @@ header{
 .menue{
   color: #06283D  ;
 }
+
 .nav__Search-item-title{
     font-size: 25px;
+    transition: all .3s ease;
+}
+.nav__Search-item-title:hover{
+  text-decoration: underline;
+}
+.nav__Search-item-title:active{
+  transform: scale(1.1);
 }
 .liked{
     color: #DD5353;
@@ -162,13 +170,21 @@ form{
     right: 0;
     transform: translate(30px,-70px);
     z-index: 99;
-    padding: 10px;
-    background-color: rgba(180, 66, 66, 0.858);
+    padding: 7px;
+    background-color: #FF1E1E;
     border-bottom-left-radius: 15px; 
+    transition: all .5s ease;
   }
   .like{
     color: white;
     font-size: 30px;
+    /* transition: all 1s ease; */
+  }
+   .heart:active  {
+    background-color: white;
+  }
+  .like:active{
+    color: #D31027;
   }
 .card-item{
     list-style-type: initial;
@@ -306,20 +322,24 @@ form{
   }
   .modal-content{
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
+    justify-content: center;
     align-items: center;
-    max-width: 1050px;
-    height: 550px;
+    width: 1050px;
+    /* height: 550px; */
+    padding: 20px;
     background-color: #fff;
+    gap: 30px;
     /* position: relative;   */
     
   }
   .modal-img{
     width: 300px;
+    padding-left: 30px;
   }
   .modal-item{
-    font-size: 20px;
-    color: #FD841F;
+    font-size: 25px;
+    color: black;
   }
   .modal-list{
     margin: 0;
@@ -329,7 +349,21 @@ form{
     position: absolute;
     right: 0;
   }
-           
+  .year-item{
+    color: var(--mdb-green);
+    font-family: monospace;
+  }
+  .dav-item{
+    color: var(--mdb-blue);
+    font-family: monospace;
+  }
+  .til-item{
+    color: #FF6B6B;
+    font-family: monospace;
+  }
+  .star{
+    color: yellow;
+  }         
            
   .btnModal {
      background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
@@ -351,12 +385,11 @@ form{
    }
   
 .modal-swipe{
-  transform: translateY(-200%);
+  transform: translateY(200%);
 }
 .summary{
   width: 80%;
 }
-
 
 
 
@@ -423,3 +456,59 @@ form{
   }
 }
   
+
+
+/* ======== SAVATCHA   ======= */
+.films-box{
+  width: 100vw;
+  height: 100vh; 
+  overflow-y: scroll;
+  background-color: rgba(192, 185, 185, 0.8);
+  backdrop-filter: blur(10px);
+  position: absolute;
+  border-radius: 10px;
+  transition: all .3s ease;
+  padding: 15px;
+  z-index: 999999;
+}
+.film-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+
+
+}
+.film{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 600px;
+  height: 300px;
+  padding: 10px;
+  background-color: #F8F5F1;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  position: relative;
+
+}
+.film-imgs{
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+}
+.YOP{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 40px;  
+  cursor: pointer;
+}
+.clos{
+  position: fixed;
+  font-size: 30px;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}

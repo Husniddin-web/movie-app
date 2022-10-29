@@ -15,135 +15,301 @@ let allMovies = movies.map((e) => {
         bigImg: e.bigThumbnail,
     }
 })
-//////////////////////  RENDER FUNCTION //////////////////////////////////////
-// render(allMovies)
-$('.all-movies-wrapper').innerHTML='<span class="loader"></span>'
-setTimeout(() => {
-    $('.all-movies-wrapper').innerHTML=''
-    render(allMovies)
-}, 1500);
-function render(data = []) {
-    data.forEach(e => {
-        const card = createElement('div'
-            , "all-movies card ",
+//======= VARIEBLES ======// 
+let moviesWrappper = $('.all-movies-wrapper');
+let optionForm = $('#select-form')
 
+
+//======= VARIEBLES ======// 
+
+
+
+
+
+
+
+
+
+
+
+// ======= RENDER FUNCTION =======//
+render(allMovies, moviesWrappper);
+function render(data, append) {
+
+    data.forEach(e => {
+        const card = createElement('div', 'all-movies card',
             `
-        <span class="heart"><i class="bi bi-heart like"></i></span>
-        <span class="   badge rounded bg-danger text-light year">${e.year}</span>
+        <span  class="heart like" data-heart=${e.id}><i  data-heart=${e.id} class="bi bi-heart-fill like"></i></span>
+        <span class="   badge rounded bg-success text-light year">${e.year}</span>
         <img src='${e.smallImg}' alt="rasm" class="card-img">
-                            <div class="card-body">
-                                <h3 class="card-title"> ${e.title} </h3>
-                                <ul class="card-list">
-                                    <li class="card-item">Rating:${e.rating}</li>
-                                    <li class="card-item">Catogry:${e.category}</li>
-                                    <li class="card-item">Davomiyligi:${e.time}</li>
-                                </ul>
-                                <ul class="card-btn m-0 p-0">
-                                    <li><a href="${e.youtube}" class="btn-see">YOUTUBE</a></li>
-                                    <li><button class="btn-read">READ ME</button></li>
-                                </ul>
-                            </div>
-        `)
-        card.dataset.dbid = e.id
-        $('.all-movies-wrapper').appendChild(card)
+        <div class="card-body">
+            <h3 class="card-title"> ${e.title} </h3>
+            <ul class="card-list">
+                <li class="card-item">Rating:${e.rating}</li>
+                <li class="card-item">Catogry:${e.category}</li>
+                <li class="card-item">Davomiyligi:${e.time}</li>
+            </ul>
+            <ul class="card-btn m-0 p-0">
+                <li><a href="${e.youtube}" class="btn-see">YOUTUBE</a></li>
+                <li><button  data-btn=${e.id} class="btn-read">READ ME</button></li>
+            </ul>
+        </div>
+
+        `
+        )
+        card.dataset.id = e.id
+        append.appendChild(card);
     });
 }
-// ============= CATEGORY DYNAMIC OPTION==========////
-let typeFilm = []
-function dynamicCategory(data) {
-    data.forEach(e => {
-        e.category.forEach(e => {
-            if (!typeFilm.includes(e)) {
-                typeFilm.push(e);
+
+
+
+// ======= RENDER FUNCTION =======//
+
+
+
+
+
+
+
+// ======= CATOGRY RENDER ==== ///
+let categoryFilms = []
+categoryFilm(allMovies);
+function categoryFilm(data) {
+    data.filter(e => {
+        e.category.filter(elements => {
+            if (!categoryFilms.includes(elements)) {
+                categoryFilms.push(elements)
             }
+
         })
     })
 }
-dynamicCategory(allMovies)
+categoryFilms.sort()
+renderCategory(categoryFilms)
+function renderCategory(data) {
+    data.forEach(e => {
+        const list = createElement('option', 'item-c', e)
+        optionForm.appendChild(list);
+    })
+}
 
-
-typeFilm.forEach(e => {
-    const option = createElement('option', 'option', e);
-    $('#select-form').appendChild(option)
-})
-// ============= CATEGORY DYNAMIC OPTION==========////
-
-
-
-
-
+// ======= CATOGRY RENDER ==== ///
 
 
 
 
-////////////////////// SEARCH FILM ///////////////////////
+//====== SEARCH FILM IN HEADER  =======//
 function findFilm(str) {
-    return allMovies.filter(e => {
-        return e.title.match(str)
+    return allMovies.filter((e) => {
+        return e.title.match(str);
     })
 }
+
+
 let searchFilm = $('#searchFilm');
-findFilmTitle(searchFilm);
+searchFilm.addEventListener('keyup', e => {
+    moviesWrappper.innerHTML = ''
+    let searchValue = e.target.value.toLowerCase().trim();
+    let searchText = new RegExp(searchValue, "gi")
+    console.log(searchText);
+    let result = findFilm(searchText);
+    render(result, moviesWrappper);
+})
 
-
-function findFilmTitle(data) {
-    data.addEventListener('keyup', (e) => {
-        $('.all-movies-wrapper').innerHTML = ''
-        let inputValue = data.value.toLowerCase();
-        let searchText = new RegExp(inputValue, "gi");
-        let searchResult = findFilm(searchText)
-        render(searchResult)
-    
-    }
-    )
-}
-////////////////////// SEARCH FILM  HEADER BY INPUT END ///////////////////////
-
-
-
+$('.menue').addEventListener('click', () => {
+    moviesWrappper.innerHTML = ''
+    render(allMovies, moviesWrappper);
+    searchFilm.value = ''
+    $('.infos').innerHTML = ''
+})
+//====== SEARCH FILM IN HEADER  =======//
 
 
 
 
-////////////////////// SEARCH FILM  HERO BY INPUT  ///////////////////////
-function findFilmRatCtg(str, rat, ctg) {
-    return allMovies.filter(e => {
-        return e.title.match(str) && e.rating >= rat && e.category.includes(ctg)
+// ====== SEARCH FILM MENUE ======//
+
+
+function findFils(str, rat, ctg) {
+    return allMovies.filter((e) => {
+        return e.title.match(str) && e.rating >= rat && e.category.includes(ctg);
     })
 }
-let btn = $('#hero-btn')
-btn.addEventListener('click', () => {
-    $('.all-movies-wrapper').innerHTML = '<span class="loader"></span>'
-    let inputValue = $('#srFilm').value.toLowerCase();
-    let number = $('#number').value;
-    let ctgs = $('#select-form').value
-    let searchText = new RegExp(inputValue, "gi");
-    let searchResult = findFilmRatCtg(searchText, number, ctgs)
-    setTimeout(() => {
-        $('.all-movies-wrapper').innerHTML =''
-        $('.infos').innerHTML = `<h2 class="info">${searchResult.length} ta kino topildi</h2>`
-        render(searchResult)
-        $('#srFilm').value='';
-        $('#number').value='1'
-    }, 1000);
-}
-)
-////////////////////// SEARCH FILM  HERO BY INPUT  END  ///////////////////////
 
-//////awesdzxxsw`=======MENUE ========////////
-$('.menue').addEventListener('click', () => {
-    $('#searchFilm').value=''
-    $('.all-movies-wrapper').innerHTML = '<span class="loader"></span>'
-    setTimeout(() => {
-        $('.all-movies-wrapper').innerHTML =''
-        render(allMovies)
-    }, 1000);
+
+
+
+
+
+let searchBtn = $('#hero-btn');
+let inputValue = $('#srFilm')
+searchBtn.addEventListener('click', () => {
+    if (inputValue.value.length > 0) {
+        moviesWrappper.innerHTML = ''
+        let srVl = inputValue.value.toLowerCase().trim();
+        let numberValue = $('#number').value;
+        let type = $('#select-form').value;
+        let searchText = new RegExp(srVl, "gi")
+        let result = findFils(searchText, numberValue, type);
+        $('#srFilm').value = ''
+        $('#number').value = '1'
+        $('#select-form').value = 'All'
+        $('.infos').innerHTML = `<h3 class="info">  ${result.length} ta malumot topildi</h3>`
+        render(result, moviesWrappper);
+    } else {
+        alert('KINO NOMI TANLANG')
+    }
+
 })
+
+
+
+//========== MODAL CONTENT  ==========///
+
+
+function findModal(id) {
+    let filtered = allMovies.filter(e => {
+        return e.id == id
+    })
+    let item = filtered[0]
+    $('.modal-box').innerHTML = ''
+    const itemModal = createElement('div', 'modal-box', `
+
+
+    <div class="modal-logo">
+                        <img class='modal-img' src="${item.bigImg}" alt="picture">
+                    </div>
+                    <div class="modal-text">
+                        <ul class="modal-list">
+                            <li class="modal-item">Year: <strong class="year-item">${item.year}-yil</strong> </li>
+                            <li class="modal-item">Davomiyligi: <strong class="dav-item">${item.time}</strong> </li>
+                            <li class="modal-item"> Til : <strong class="til-item">Uzbek</strong></li>
+                            <li class="modal-item ">Izoh: <span class="summary">${item.summary}</span>
+                            </li>
+                            <li class="modal-item ">Rating: <span class="rating-item">${item.rating}</span><span class="star"><i
+                                        class="bi bi-star-fill star"></i></span>
+                        </ul>
+                    </div>
+    `)
+    $('.modal-box').appendChild(itemModal);
+}
+//    REDNDERlikes MOVIES //
+function renderLikes(data) {
+    data.forEach(e => {
+        const div = createElement('div', 'film', `
+
+        <span class="YOP"><i class="bi bi-x closed" data-close="${e.id}"></i></span>
+        <div class="film-img">
+            <img    class="film-imgs" src="${e.bigImg}" alt="">
+        </div>
+        <div class="modal-text">
+            <ul class="modal-list">
+                <li class="modal-item">Year: <strong class="year-item">${e.year}-yil</strong> </li>
+                <li class="modal-item">Davomiyligi: <strong class="dav-item">${e.time}</strong> </li>
+                <li class="modal-item"> Til : <strong class="til-item">Uzbek</strong></li>
+                <li class="modal-item ">Rating: <span class="rating-item">${e.rating}</span><span class="star"><i
+                            class="bi bi-star-fill star"></i></span>
+            </ul>
+        </div>
+        `)
+        div.dataset.dbid = `${e.id}`
+        $('.film-wrapper    ').appendChild(div);
+    })
+}
+//    REDNDERlikes MOVIES //
+
+
+
+
+
+
+likes = [];
+function addLike(id) {
+    $('.film-wrapper').innerHTML = ''
+    let filterLiked = allMovies.filter(e => {
+        return e.id === id
+    })
+    console.log((filterLiked[0]));
+    if (!likes.includes(filterLiked[0])) {
+        likes.push(filterLiked[0]);
+    }
+    else {
+        alert("OLDIN QOSHILGAN")
+    }
+    if (likes.length > 0) {
+        renderLikes(likes);
+    }
+}
+function deleteLikes(id) {
+    $('.film-wrapper').innerHTML = ''
+    let sl = likes.filter(e => {
+        return e.id !== id
+    })
+    likes.length=0 
+}
+
+
+
+
+
+window.addEventListener('click', e => {
+    let readBtn = e.target
+    if (readBtn.classList.contains('btn-read')) {
+        $('.modal-wrapper').classList.remove('modal-swipe')
+        findModal(e.target.getAttribute('data-btn'))
+    }
+    $('.btnModal').addEventListener('click', (e) => {
+        $('.modal-wrapper').classList.add('modal-swipe');
+    })
+
+
+
+
+    if (e.target.classList.contains('like')) {
+        console.log(e.target.getAttribute('data-heart'));
+        addLike(e.target.getAttribute('data-heart'));
+    }
+    if (e.target.classList.contains('closed')) {
+        deleteLikes(likes, e.target.getAttribute('data-close'))
+        console.log(e.target.getAttribute('data-close'));
+    }
+
+
+
+
+
+    if (e.target.classList.contains('adds')) {
+        $('.films-box').classList.remove('modal-swipe')
+    }
+    if (e.target.classList.contains('clos')) {
+        $('.films-box').classList.add('modal-swipe')
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //======= NAV BAR ======/////
 let bar = $('.menue-bar')
 bar.addEventListener('click', () => {
     if (bar.innerHTML == '<i class="bi bi-list"></i>') {
-        $('.nav__search-list').setAttribute('class', 'nav__search-list')
+        $('.nav__search-list').setAttribute('class', 'nav__search-list ')
         bar.innerHTML = '<i class="bi bi-x-square"></i>'
     } else if (bar.innerHTML == '<i class="bi bi-x-square"></i>') {
         bar.innerHTML = '<i class="bi bi-list"></i>'
@@ -151,65 +317,3 @@ bar.addEventListener('click', () => {
     }
 })
 //======= NAV BAR ======/////
-
-
-
-
-//===== LIKE MOVIEE ==/////
-let wrapper = $('.all-movies-wrapper')
-let span = $('.heart')
-wrapper.addEventListener('click', e => {
-    let heart = e.target
-    if (heart.className == 'bi bi-heart like') {
-        heart.className = "bi bi-heart-fill like"
-        $('.plus').textContent++
-    } else if (heart.className == "bi bi-heart-fill like") {
-        heart.className = "bi bi-heart like"
-        $('.plus').textContent--
-    }
-})
-//===== LIKE MOVIEE ==/////
-
-
-
-
-// ====READ ME=====///
-let idArr=[]
-let btnRead = $('.btn-read')
-wrapper.addEventListener('click', (e) => {
-    let btn = e.target.className
-    if (btn == 'btn-read') {
-        console.log(btn.parentNode);
-        $('.modal-wrapper').classList.remove('modal-swipe')
-    }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ====== MODAL =====/////
-let modal = $('#modal')
-console.log(modal);
-    let close = $('#modal-btn')
-close.addEventListener('click', () => {
-    modal.classList.add('modal-swipe')
-});
-
-let modalContent=$('.modal-content')
-function readMe(data) {
-    data.forEach(e=>{
-         let id =e.id
-    })
-
-}
-readMe(allMovies)
-// ====== MODAL =====/////
