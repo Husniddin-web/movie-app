@@ -1,0 +1,25 @@
+.dark {
+  background-color: #423952;
+}
+.dark header {
+  color: white;
+  background-color: #645e6f;
+}
+.dark header .nav__title {
+  color: white;
+}
+.dark header .nav__search-list .nav__Search-item-title {
+  color: white;
+}
+.dark header .nav__search-list .nav__search-item .bi-person-fill {
+  color: white;
+}
+.dark main .all-movies {
+  background-color: rgba(136, 126, 126, 0.198);
+}
+.dark main .card-title {
+  color: white;
+}
+.dark main .card-item {
+  color: white;
+}/*# sourceMappingURL=maoin.css.map */

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- main css  -->
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/maoin.css">
     <link rel="shortcut icon" href="./img/images.png" type="image/x-icon">
     <title>Uz_Movie.com</title>
 </head>
@@ -32,9 +33,9 @@
                 </div>
             </div>
             <div class="films-box modal-swipe container">
-                <span class="clos"><i class="bi bi-x-octagon-fill clos " ></i></span>
+                <span class="clos"><i class="bi bi-x-octagon-fill clos "></i></span>
                 <div class="film-wrapper">
-                    
+
                 </div>
             </div>
             <div class="container">
@@ -53,18 +54,30 @@
                                     id="searchFilm" type="text" name="search-fil">
                             </li>
                             <li class="nav__search-item">
-                                <a href="./index.html" class="nav__Search-item-title menue">Bosh sahifa</a>
+                                <a href="./index.html" class="nav__Search-item-title menue title">Bosh sahifa</a>
                             </li>
                             <li class="nav__search-item">
-                                <h3 class="nav__Search-item-title adds" id="adds">Sevimlilar</h3>
-
-
+                                <a class="nav__Search-item-title adds  title" id="adds">Sevimlilar</a>
                                 <span><i class="bi bi-bookmark-heart  liked"></i></span>
                                 <span class=" plus  badge rounded-pill bg-info text-dark"></span>
                             </li>
                             <li class="nav__search-item">
-                                <h3 class="nav__Search-item-title">Kirish</h3>
+                                <a class="nav__Search-item-title title login" >Kirish</a>
                                 <span><i class="bi bi-person-fill person"></i></span>
+                            </li>
+                            <li class="nav__search-nght-light">
+                                <span value="#153462" class="moon">
+                                    <span class="bi bi-moon-stars-fill  night-moon"></span>
+
+                                </span>
+                            </li>
+                            <li class="nav__search-lang">
+                                <select id="lang" class="bg-primary p-2 rounded text-white  fs-25">
+                                    <option  value="uz">uz</option>
+                                    <option value="ru">Rus</option>
+                                    <option value="eng">Eng</option>
+                                </select>
+
                             </li>
                         </ul>
                         <span class="menue-bar"><i class="bi bi-list"></i></span>
@@ -88,10 +101,10 @@
                             <select name="catogry" id="select-form" class="form-select">
                                 <option value="All" selected disabled>All</option>
                             </select>
-                            <button class=" w-100 " type="button" id="hero-btn">Search</button>
+                            <button class=" w-100  title " type="button" id="hero-btn">Search</button>
                         </form>
                         <div class="card infos shadow my-3 ">
-
+                            
                         </div>
                     </div>
                     <div class="col-lg-9">

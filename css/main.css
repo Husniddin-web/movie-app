@@ -2,7 +2,6 @@
 body{
     /* scroll-behavior: smooth; */
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #F8F5F1;
 }
 h3{
   margin: 0;
@@ -19,9 +18,9 @@ header{
   top: 0;
   width: 100%;
   z-index: 99999;
+  background-color: #F9F9F9;
 }
 .nav__site{
-    background-color: #F9F9F9;
     transition: all 1s ease;
 }
 .nav{
@@ -63,7 +62,7 @@ header{
 .nav__Search-item-title{
   cursor: pointer;
 }
-.menue{
+.title{
   color: #06283D  ;
 }
 
@@ -116,7 +115,6 @@ form{
     transition: 0.5s;
     background-size: 200% auto;
     color: white;            
-    box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
     border: transparent;
@@ -207,7 +205,6 @@ form{
     transition: 0.5s;
     background-size: 200% auto;
     color: white;            
-    box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
     border: transparent;
@@ -228,7 +225,6 @@ form{
     transition: 0.5s;
     background-size: 200% auto;
     color: white;            
-    box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
   }
@@ -504,6 +500,7 @@ form{
   right: 20px;
   font-size: 40px;  
   cursor: pointer;
+  color: black;
 }
 .clos{
   position: fixed;
@@ -511,4 +508,19 @@ form{
   right: 0;
   top: 0;
   cursor: pointer;
+  color: black;
+}
+
+/*     NIGHT MOOD LIGHT */
+.night-moon
+{
+  font-size: 22px;
+}
+.light-moon{
+  font-size: 22px;
+  color: white;
+
+}
+option{
+  padding: 20px;
 }

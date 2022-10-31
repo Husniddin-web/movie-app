@@ -22,16 +22,6 @@ let optionForm = $('#select-form')
 
 //======= VARIEBLES ======// 
 
-
-
-
-
-
-
-
-
-
-
 // ======= RENDER FUNCTION =======//
 render(allMovies, moviesWrappper);
 function render(data, append) {
@@ -62,15 +52,7 @@ function render(data, append) {
     });
 }
 
-
-
 // ======= RENDER FUNCTION =======//
-
-
-
-
-
-
 
 // ======= CATOGRY RENDER ==== ///
 let categoryFilms = []
@@ -95,9 +77,6 @@ function renderCategory(data) {
 }
 
 // ======= CATOGRY RENDER ==== ///
-
-
-
 
 //====== SEARCH FILM IN HEADER  =======//
 function findFilm(str) {
@@ -125,9 +104,6 @@ $('.menue').addEventListener('click', () => {
 })
 //====== SEARCH FILM IN HEADER  =======//
 
-
-
-
 // ====== SEARCH FILM MENUE ======//
 
 
@@ -136,11 +112,6 @@ function findFils(str, rat, ctg) {
         return e.title.match(str) && e.rating >= rat && e.category.includes(ctg);
     })
 }
-
-
-
-
-
 
 let searchBtn = $('#hero-btn');
 let inputValue = $('#srFilm')
@@ -155,15 +126,13 @@ searchBtn.addEventListener('click', () => {
         $('#srFilm').value = ''
         $('#number').value = '1'
         $('#select-form').value = 'All'
-        $('.infos').innerHTML = `<h3 class="info">  ${result.length} ta malumot topildi</h3>`
+        $('.infos').innerHTML = `<h3 class="info title">  ${result.length} ta kino topildi</h3>`
         render(result, moviesWrappper);
     } else {
         alert('KINO NOMI TANLANG')
     }
 
 })
-
-
 
 //========== MODAL CONTENT  ==========///
 
@@ -214,23 +183,18 @@ function renderLikes(data) {
         </div>
         `)
         div.dataset.dbid = `${e.id}`
-        $('.film-wrapper    ').appendChild(div);
+        $('.film-wrapper').appendChild(div);
     })
 }
 //    REDNDERlikes MOVIES //
 
-
-
-
-
-
+//    ADD MOVIE  MODAL
 likes = [];
 function addLike(id) {
     $('.film-wrapper').innerHTML = ''
     let filterLiked = allMovies.filter(e => {
         return e.id === id
     })
-    console.log((filterLiked[0]));
     if (!likes.includes(filterLiked[0])) {
         likes.push(filterLiked[0]);
     }
@@ -240,17 +204,25 @@ function addLike(id) {
     if (likes.length > 0) {
         renderLikes(likes);
     }
+    console.log(likes);
+
 }
+
+
+let liked = []
+console.log(liked);
+// DELETE MOVIE FROM ON MODAL 
 function deleteLikes(id) {
     $('.film-wrapper').innerHTML = ''
-    let sl = likes.filter(e => {
+     let liked = likes.filter(e => {
         return e.id !== id
     })
-    likes.length=0 
+    console.log(liked);
+    renderLikes(liked);
+    liked.innerHTML=''
 }
 
-
-
+//    WINNDOW  ADDEVENLISTENR USE  EVENT DELAGATION  //
 
 
 window.addEventListener('click', e => {
@@ -267,43 +239,25 @@ window.addEventListener('click', e => {
 
 
     if (e.target.classList.contains('like')) {
-        console.log(e.target.getAttribute('data-heart'));
+        console.log(e.target.getAttribute('data-heart'));  //  GET LIKE DATA ID   AND GIVE FUNCTION OF PARAMETR
         addLike(e.target.getAttribute('data-heart'));
     }
     if (e.target.classList.contains('closed')) {
-        deleteLikes(likes, e.target.getAttribute('data-close'))
+        deleteLikes(e.target.getAttribute('data-close'))    // GET CLOSE ICON DATA ID  AND GIVE FUCTI0ON OF PARAMETR
         console.log(e.target.getAttribute('data-close'));
     }
 
 
 
 
-
+    console.log(e.target);
     if (e.target.classList.contains('adds')) {
-        $('.films-box').classList.remove('modal-swipe')
+        $('.films-box').classList.remove('modal-swipe') // SEE LIKE MOVIE ON MODAL 
     }
     if (e.target.classList.contains('clos')) {
-        $('.films-box').classList.add('modal-swipe')
+        $('.films-box').classList.add('modal-swipe')  // CLOSE MODAL OF LOVE MOVIE
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //======= NAV BAR ======/////
 let bar = $('.menue-bar')
@@ -317,3 +271,108 @@ bar.addEventListener('click', () => {
     }
 })
 //======= NAV BAR ======/////
+
+
+
+
+
+
+
+//  NIGHT   LIGHT MOOD///
+$('.nav__search-nght-light').addEventListener('click', (e) => {
+    let target = e.target;
+    if (target.classList.contains('night-moon')) {
+        $('.moon').innerHTML = '<span class="bi bi-moon-stars  light-moon"></span>'
+        darkMode()
+    } else {
+        $('.moon').innerHTML = '<span class="bi bi-moon-stars-fill  night-moon"></span>'
+        lightMode()
+    }
+})
+
+
+
+
+function darkMode() {
+    document.body.classList.add('dark');
+    localStorage.setItem('mode', 'dark');
+}
+function lightMode() {
+    document.body.classList.remove('dark');
+    localStorage.setItem('mode', 'light');
+}
+
+
+
+
+
+//  LANGUAGE/=======
+(function () {
+    let theme = localStorage.getItem('mode');
+    document.body.classList.add(theme)
+}())
+
+
+//  NIGHT   LIGHT MOOD///
+
+
+
+function lang() {
+    const language = {
+        uz: {
+            home: 'Bosh menyu',
+            loves: 'Sevimliklar',
+            login: 'Kirish',
+            search: 'Qidrish',
+            result:' ta kino topildi'
+        },
+        eng: {
+            home: 'Home page',
+            loves: 'Loves',
+            login: 'Login',
+            search: 'Search',
+            result:' found movies',
+        },
+        ru: {
+            home: 'Главное меню',
+            loves: 'Избранное',
+            login: 'Войти',
+            search: 'поиск',
+            result:' фильм найден',
+        }
+    }
+    localStorage.setItem('langs', JSON.stringify(language))
+}
+lang();
+
+
+
+
+
+
+let languages = JSON.parse(localStorage.getItem('langs'))
+
+let selectForm = $('#lang')
+selectForm.addEventListener('change', e => {
+    localStorage.setItem('selectedLanguage', e.target.value);
+    changeLanguage(languages[e.target.value]);
+})
+function changeLanguage(language) {
+    let navItem = $$('.title');
+    let arr = [];
+    for (let item in language) {
+        arr.push(language[item]);
+    }
+    navItem.forEach((e, i) => {
+        e.textContent = arr[i]
+    })
+}
+
+
+(function () {
+    let select = localStorage.getItem('selectedLanguage')
+    let langs = JSON.parse(localStorage.getItem('langs'))
+    const selected = langs[select]
+
+    changeLanguage(selected)
+}())

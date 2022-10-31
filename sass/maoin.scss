@@ -1,0 +1,39 @@
+.dark {
+    background-color: #423952;
+
+    header {
+        color: white;
+        background-color: #645e6f;
+
+        .nav__title {
+            color: white;
+        }
+
+        .nav__search-list {
+            .nav__Search-item-title {
+                color: white;
+            }
+
+            .nav__search-item {
+                .bi-person-fill {
+                    color: white;
+                }
+            }
+        }
+
+    }
+
+    main {
+        .all-movies{
+            background-color: rgba(136, 126, 126, 0.198);
+        }
+        .card-title {
+            color: white;
+        }
+
+        .card-item {
+            color: white;
+        }
+    }
+}
+
