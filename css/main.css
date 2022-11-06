@@ -267,7 +267,7 @@ form{
     top: 80px;
     background-color: #150050;
     width: 100vw;
-    height: 300px;
+    height: 400px;
     right: 1px;
     padding: 0;
     gap: 0;
@@ -277,7 +277,7 @@ form{
     color: white;
   }
   .nav__search-item{
-    width: 50%;
+    width: 100%;
     padding: 20px;
     gap: 0;
     transition: all .3s ease;
@@ -402,7 +402,9 @@ form{
   animation: mulShdSpin 1.3s infinite linear;
   transform: translateZ(0);
 }
-
+.all-movies-container{
+  padding-left: 10px;
+}
 @keyframes mulShdSpin {
   0%,
   100% {

@@ -1,5 +1,5 @@
 ////////////// DB.JS NORMALIZE //////////////////
-movies.splice(100)
+movies.splice(1, 100)
 let allMovies = movies.map((e) => {
     return {
         title: e.title,
@@ -91,7 +91,6 @@ searchFilm.addEventListener('keyup', e => {
     moviesWrappper.innerHTML = ''
     let searchValue = e.target.value.toLowerCase().trim();
     let searchText = new RegExp(searchValue, "gi")
-    console.log(searchText);
     let result = findFilm(searchText);
     render(result, moviesWrappper);
 })
@@ -113,16 +112,16 @@ function findFils(str, rat, ctg) {
     })
 }
 
-let searchBtn = $('#hero-btn');
-let inputValue = $('#srFilm')
+let searchBtn = $('#hero-btn'),
+    inputValue = $('#srFilm')
 searchBtn.addEventListener('click', () => {
     if (inputValue.value.length > 0) {
         moviesWrappper.innerHTML = ''
-        let srVl = inputValue.value.toLowerCase().trim();
-        let numberValue = $('#number').value;
-        let type = $('#select-form').value;
-        let searchText = new RegExp(srVl, "gi")
-        let result = findFils(searchText, numberValue, type);
+        let srVl = inputValue.value.toLowerCase().trim(),
+            numberValue = $('#number').value,
+            type = $('#select-form').value,
+            searchText = new RegExp(srVl, "gi"),
+            result = findFils(searchText, numberValue, type)
         $('#srFilm').value = ''
         $('#number').value = '1'
         $('#select-form').value = 'All'
@@ -189,7 +188,8 @@ function renderLikes(data) {
 //    REDNDERlikes MOVIES //
 
 //    ADD MOVIE  MODAL
-likes = [];
+let likes = JSON.parse(localStorage.getItem('likedFilm')) || [];
+renderLikes(likes);
 function addLike(id) {
     $('.film-wrapper').innerHTML = ''
     let filterLiked = allMovies.filter(e => {
@@ -202,24 +202,25 @@ function addLike(id) {
         alert("OLDIN QOSHILGAN")
     }
     if (likes.length > 0) {
+        setLocalStroge();
         renderLikes(likes);
     }
-    console.log(likes);
-
 }
-
-
-let liked = []
-console.log(liked);
+setLocalStroge();
+function setLocalStroge() {
+    localStorage.setItem('likedFilm', JSON.stringify(likes));
+}
 // DELETE MOVIE FROM ON MODAL 
 function deleteLikes(id) {
+    let films = JSON.parse(localStorage.getItem('likedFilm'))
     $('.film-wrapper').innerHTML = ''
-     let liked = likes.filter(e => {
+    $('.film-wrapper').innerHTML = ''
+    let filteredLiked = films.filter(e => {
         return e.id !== id
     })
-    console.log(liked);
-    renderLikes(liked);
-    liked.innerHTML=''
+    likes = filteredLiked
+    setLocalStroge();
+    renderLikes(likes);
 }
 
 //    WINNDOW  ADDEVENLISTENR USE  EVENT DELAGATION  //
@@ -239,18 +240,16 @@ window.addEventListener('click', e => {
 
 
     if (e.target.classList.contains('like')) {
-        console.log(e.target.getAttribute('data-heart'));  //  GET LIKE DATA ID   AND GIVE FUNCTION OF PARAMETR
+      //  GET LIKE DATA ID   AND GIVE FUNCTION OF PARAMETR
         addLike(e.target.getAttribute('data-heart'));
     }
     if (e.target.classList.contains('closed')) {
         deleteLikes(e.target.getAttribute('data-close'))    // GET CLOSE ICON DATA ID  AND GIVE FUCTI0ON OF PARAMETR
-        console.log(e.target.getAttribute('data-close'));
     }
 
 
 
 
-    console.log(e.target);
     if (e.target.classList.contains('adds')) {
         $('.films-box').classList.remove('modal-swipe') // SEE LIKE MOVIE ON MODAL 
     }
@@ -324,21 +323,21 @@ function lang() {
             loves: 'Sevimliklar',
             login: 'Kirish',
             search: 'Qidrish',
-            result:' ta kino topildi'
+            result: ' ta kino topildi'
         },
         eng: {
             home: 'Home page',
             loves: 'Loves',
             login: 'Login',
             search: 'Search',
-            result:' found movies',
+            result: ' found movies',
         },
         ru: {
             home: 'Главное меню',
             loves: 'Избранное',
             login: 'Войти',
             search: 'поиск',
-            result:' фильм найден',
+            result: ' фильм найден',
         }
     }
     localStorage.setItem('langs', JSON.stringify(language))
